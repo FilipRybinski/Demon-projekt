@@ -33,7 +33,7 @@ void synchronise(configuration config){
         if(Lista->type==REGULAR_FILE){
             if(ExistsCheck(file_dst_path)==false){
                     if(size>config.size){
-                        syslog(LOG_INFO, "Kopiowanie pliku przy pomocy mmap waga >10MB. Plik skopiowany z %s do %s",file_src_path,file_dst_path);
+                        syslog(LOG_INFO, "Kopiowanie pliku przy pomocy mmap waga >%d MB. Plik skopiowany z %s do %s",(config.size/(1024*1024)),file_src_path,file_dst_path);
                         copy_file_mmap(file_src_path,file_dst_path);
                         }else{
                             syslog(LOG_INFO, "Kopiowanie pliku przy pomocy read/write. Plik skopiowany z %s do %s",file_src_path,file_dst_path);
@@ -45,7 +45,7 @@ void synchronise(configuration config){
                  if(Check_Time(file_src_path,file_dst_path)==false){
                      syslog(LOG_INFO, "Kopiowanie pliku z powodu roznego czasu edycji. Plik zmodyfikowany %s",file_dst_path);
                      remove(file_dst_path);
-                     if(size>config.size){
+                     if(size/1048576 >10){
                         copy_file_mmap(file_src_path,file_dst_path);
                      }
                      else{

@@ -90,4 +90,4 @@ echo "Update Demon"
 make program
 echo "Start Program Demon"
 echo "Parameters -R Time-60s Weight=16 MB"
-./program -r -s ~/test3 -d ~/test4 -t 60 -w 16
+./program -r -s ~/test3 -d ~/test4 -t 30 -w 16
